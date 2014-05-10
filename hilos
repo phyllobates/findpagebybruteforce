@@ -1,0 +1,35 @@
+import thread
+import time
+import os
+
+
+# Indica si ha terminado el hilo
+hilo_terminado = False
+
+# Funcion que se ejecuta en un hilo
+def funcion (inicio,fin):
+    global hilo_terminado
+    # Bucle de inicio a fin, con espera de un segundo
+    os.system('python hack4.py '+inicio)
+    # marca hilo terminado
+    print "Terminado hilo "
+
+if __name__ == '__main__':
+    # Lanzamos un hilo
+	encontro = 0
+	a=0
+	while a >= 0 and a < 2 and encontro==0:
+		b=0
+		while b >= 0 and b < 10 and encontro==0:
+			c=0
+			while c >= 0 and c < 10 and encontro==0:
+				print "Lanza hilo "+str(a)+str(b)+str(c)
+			    	thread.start_new_thread(funcion, (str(a)+str(b)+str(c),11))
+				c=c+1
+			b=b+1
+		a=a+1
+    # y nos ponemos a contar, en paralelo con lo que haga
+    # el hilo
+    # Espera a que termine el hilo
+	while (not hilo_terminado):
+		pass
