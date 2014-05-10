@@ -1,0 +1,45 @@
+#!/usr/bin/python
+import urllib
+import re
+import os
+import sys
+
+#<!-- 0 - 2000 || a - z -->
+
+url = "http://hubpi.co/reto2/h####$$.php"
+			     
+#
+#habcdef.php
+#try:
+#os.system('python hack4.py')
+encontro = 0
+e=97
+uno = ""
+if len(sys.argv) >= 2:
+        uno = sys.argv[1];
+else:
+        print "Este programa necesita un parametro"
+
+d=0
+while d >= 0 and d < 10 and encontro==0:
+	while e >= 97 and e < 123 and encontro==0:
+		f=97
+		while f >= 97 and f < 123 and encontro==0:
+			cuatro = str(d)
+			cinco = chr(e)
+			seis = chr(f)
+			prueba = url.replace("h####$$.php","h"+uno+cuatro+cinco+seis+".php")
+			print "Probando "+prueba
+			try:
+				paquete = urllib.urlopen(prueba)
+				if paquete.code == 200:
+					os.system("echo " + prueba+ " >> paginaencontrada.txt")
+					print "Si existe la pagina"+prueba
+					encontro =1
+				else:
+					print uno+cinco+seis+" Fallo \n"
+			except:
+				print uno+cinco+seis+" Excepcion \n"
+			f=f+1
+		e=e+1
+	d=d+1
